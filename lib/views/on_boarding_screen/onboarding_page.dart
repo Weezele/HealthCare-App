@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'componants/onboarding_content.dart';
-import 'componants/page_indicator.dart';
-import 'componants/onboarding_buttons.dart';
+import 'package:health_app/views/home_screen/home_page.dart';
+import 'components/onboarding_content.dart';
+import 'components/page_indicator.dart';
+import 'components/onboarding_buttons.dart';
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -43,8 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       // Navigate to the next page (e.g., home page or login page)
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => Placeholder()), // Replace with your next page
+        MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     }
   }
@@ -53,8 +53,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     // Navigate to the next page (e.g., home page or login page)
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-          builder: (context) => Placeholder()), // Replace with your next page
+      MaterialPageRoute(builder: (context) => HomeScreen()),
     );
   }
 

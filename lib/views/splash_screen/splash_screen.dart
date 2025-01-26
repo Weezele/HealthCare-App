@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/views/on_boarding_screen/onboarding_page.dart';
-import 'package:health_app/views/splash_screen/componants/buildDoctorContainer/build_doctor_container.dart';
-import 'package:health_app/views/splash_screen/componants/buildPurpleLogoContainer/buildPurple_logo_container.dart';
+import 'package:health_app/views/splash_screen/components/buildDoctorContainer/build_doctor_container.dart';
+import 'package:health_app/views/splash_screen/components/buildPurpleLogoContainer/buildPurple_logo_container.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
