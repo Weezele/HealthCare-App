@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/views/all_doctors/all_doctors.dart';
 
 class CategoriesSection extends StatelessWidget {
   final List<Map<String, String>> categories = [
@@ -33,7 +34,8 @@ class CategoriesSection extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  // Define the action for "See All"
+                  // Navigate to All Doctors page without filter
+                  Navigator.pushNamed(context, '/allDoctors');
                 },
                 child: Text(
                   "See All",
@@ -54,7 +56,8 @@ class CategoriesSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: GridView.builder(
             shrinkWrap: true, // Makes GridView adapt to the content size
-            physics: NeverScrollableScrollPhysics(), // Prevent GridView scrolling
+            physics:
+                NeverScrollableScrollPhysics(), // Prevent GridView scrolling
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4, // Display four categories in each row
               crossAxisSpacing: 12, // Space between columns
@@ -62,56 +65,67 @@ class CategoriesSection extends StatelessWidget {
             ),
             itemCount: categories.length,
             itemBuilder: (context, index) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Circular Category Card
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [Colors.teal.shade400, Colors.teal.shade200],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 6,
-                          spreadRadius: 2,
-                          offset: Offset(0, 4),
+              return GestureDetector(
+                onTap: () {
+                  // Navigate to All Doctors page with the selected category
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AllDoctorsPage(),
+                      ));
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Circular Category Card
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: [Colors.teal.shade400, Colors.teal.shade200],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
-                      ],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 6,
+                            spreadRadius: 2,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          categories[index]["icon"]!,
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Center(
+                    const SizedBox(height: 8),
+                    // Category Label
+                    Flexible(
                       child: Text(
-                        categories[index]["icon"]!,
+                        categories[index]["label"]!,
                         style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
                         ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2, // Allow text wrapping for longer labels
+                        overflow:
+                            TextOverflow.ellipsis, // Handle overflow gracefully
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Category Label
-                  Flexible(
-                    child: Text(
-                      categories[index]["label"]!,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 2, // Allow text wrapping for longer labels
-                      overflow: TextOverflow.ellipsis, // Handle overflow gracefully
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),

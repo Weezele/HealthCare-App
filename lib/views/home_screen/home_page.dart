@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/views/all_appointments/all_appointments.dart';
 import 'package:health_app/views/home_screen/components/categories_section.dart';
 import 'package:health_app/views/home_screen/components/medical_centers_section.dart';
 import 'package:health_app/views/home_screen/components/promo_banner.dart';
 import 'package:health_app/views/home_screen/components/search_bar.dart';
 import 'package:health_app/views/home_screen/components/top_bar.dart';
-import 'package:health_app/views/all_doctors/all_doctors.dart'; // Import AllDoctorsPage
+import 'package:health_app/views/all_doctors/all_doctors.dart';
+import 'package:health_app/views/profile_page/profile_page.dart'; // Import AllDoctorsPage
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -44,7 +46,11 @@ class HomeScreen extends StatelessWidget {
             // Already on Home
             break;
           case 1:
-            // Navigate to Search Page (Add Search Page if needed)
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyBookingsPage(),
+                ));
             break;
           case 2:
             // Navigate to All Doctors Page
@@ -54,7 +60,11 @@ class HomeScreen extends StatelessWidget {
             );
             break;
           case 3:
-            // Navigate to Records Page (Add Records Page if needed)
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ));
             break;
           case 4:
             // Navigate to Profile Page (Add Profile Page if needed)

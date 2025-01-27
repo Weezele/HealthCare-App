@@ -7,90 +7,71 @@ class DoctorCard extends StatelessWidget {
   final String location;
   final double rating;
   final int reviews;
+  final VoidCallback onTap; // Callback for handling taps
 
-  const DoctorCard({
+  DoctorCard({
     required this.image,
     required this.name,
     required this.specialty,
     required this.location,
     required this.rating,
     required this.reviews,
+    required this.onTap, // Required callback
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          children: [
-            // Doctor Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                image,
-                width: 70,
-                height: 70,
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: onTap, // Trigger navigation when tapped
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 3,
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage(image),
               ),
-            ),
-            const SizedBox(width: 16),
-
-            // Doctor Details
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Text(
-                    specialty,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.teal,
+                    const SizedBox(height: 4),
+                    Text(
+                      specialty,
+                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
                     ),
-                  ),
-                  Text(
-                    location,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
+                    const SizedBox(height: 4),
+                    Text(
+                      location,
+                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      const SizedBox(width: 4),
-                      Text(
-                        "$rating",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        "($reviews Reviews)",
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(Icons.star, size: 16, color: Colors.orange),
+                        const SizedBox(width: 4),
+                        Text(
+                          "$rating ($reviews reviews)",
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-
-            // Favorite Button
-            IconButton(
-              icon: Icon(Icons.favorite_border),
-              onPressed: () {},
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
